@@ -21,10 +21,12 @@ FROM php:8.0-alpine
 WORKDIR /app
 COPY . /app
 RUN mv .env.example .env
-RUN composer install --ignore-platform-reqs
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+RUN composer install
 #RUN composer install --ignore-platform-req=ext-dom --ignore-platform-req=ext-fileinfo --ignore-platform-req=ext-sodium --ignore-platform-req=ext-fileinfo --ignore-platform-req=ext-fileinfo --ignore-platform-req=ext-tokenizer --ignore-platform-req=ext-dom --ignore-platform-req=ext-tokenizer --ignore-platform-req=ext-imagick --ignore-platform-req=ext-dom --ignore-platform-req=ext-dom --ignore-platform-req=ext-dom --ignore-platform-req=ext-tokenizer --ignore-platform-req=ext-dom --ignore-platform-req=ext-dom --ignore-platform-req=ext-fileinfo --ignore-platform-req=ext-gd --ignore-platform-req=ext-xmlwriter --ignore-platform-req=ext-xmlwriter --ignore-platform-req=ext-xml --ignore-platform-req=ext-xmlwriter --ignore-platform-req=ext-simplexml --ignore-platform-req=ext-xmlreader
 #ENTRYPOINT ["/usr/bin/php","artisan serve"]
 RUN php artisan key:generate && php artisan cache:clear
 EXPOSE 8000
 RUN php artisan config:clear
 CMD php artisan serve --host 0.0.0.0 --port 8000
+
