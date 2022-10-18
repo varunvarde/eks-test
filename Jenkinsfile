@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Deploying changes') { 
             steps {
-               sh 'kubectl get ns'
+               sh 'kubectl apply -f deploy.yml'
             }
         }
     }
