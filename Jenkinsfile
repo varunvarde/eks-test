@@ -16,5 +16,10 @@ pipeline {
                sh 'kubectl apply -f deploy.yml && kubectl get svc'
             }
         }
+        stage ('verifying deployment') {
+            steps {
+            sh 'kubectl get deploy test-springboot'
+            }
+        }
     }
 }
