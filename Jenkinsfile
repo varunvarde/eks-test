@@ -10,8 +10,6 @@ pipeline {
     }
     stage('pushing images to dockerHub'){
       steps{
-          
-        withCredentials([string(credentialsId: 'nadeem9975', variable: 'DOCKER_HUB_PASSWORD')]) 
         sh 'docker login -u nadeem9975 -p Nadeem@1995 && docker push nadeem9975/php:v1'
     }
     
