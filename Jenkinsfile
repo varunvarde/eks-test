@@ -1,6 +1,11 @@
 pipeline {
     agent any 
     stages {
+        stage('configureing kubectl') {    
+            steps {
+                sh 'cat ${HOME}/.kube/config'
+            }
+        }
         stage('building Image') {    
             steps {
                sh 'docker build . --no-cache -t nadeem9975/php:v1'
