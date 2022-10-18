@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     stages {
-        stage('building Image for bitcoin 0.21.0') {    
+        stage('building Image') {    
             steps {
                sh 'docker build . --no-cache -t nadeem9975/php:v1'
             }
