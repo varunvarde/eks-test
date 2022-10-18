@@ -1,22 +1,20 @@
 pipeline {
-    agent any
-    
-    stages{
-        
-    stage('docker build image'){
-        steps{
-        sh 'docker image build -t nadeem9975/php:v1 . && '
+    agent any 
+    stages {
+        stage('building Image for bitcoin 0.21.0') {    
+            steps {
+               sh 'docker build . --no-cache -t nadeem9975/php:v1'
+            }
+        }
+        stage('pushing image to hub') { 
+            steps {
+               sh ' docker  login --username dexterquazi --password "##Love##1" && docker push nadeem9975/php:v1 ' 
+            }
+        }
+        stage('Deploying changes') { 
+            steps {
+               sh 'ls'
+            }
+        }
     }
-    }
-    stage('pushing images to dockerHub'){
-      steps{
-        sh 'docker login -u nadeem9975 -p Nadeem@1995 && docker push nadeem9975/php:v1'
-    }
-    
-    stage("kubernetes deployment"){
-        steps{
-        sh 'kubectl apply -f deploy.yml'
-    }
-   } 
- }
-}}
+}
